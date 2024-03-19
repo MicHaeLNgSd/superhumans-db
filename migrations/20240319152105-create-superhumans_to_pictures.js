@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('superhumans_to_images', {
+    await queryInterface.createTable('superhumans_to_picture', {
       superhumanId: {
         type: Sequelize.INTEGER,
         field: 'superhuman_id',
@@ -15,12 +15,12 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      imageId: {
+      pictureId: {
         type: Sequelize.INTEGER,
-        field: 'image_id',
+        field: 'picture_id',
         allowNull: false,
         references: {
-          model: 'images',
+          model: 'pictures',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -40,6 +40,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('superhumans_to_images');
+    await queryInterface.dropTable('superhumans_to_picture');
   },
 };

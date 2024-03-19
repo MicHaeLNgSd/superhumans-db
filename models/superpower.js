@@ -19,8 +19,20 @@ module.exports = (sequelize, DataTypes) => {
   Superpower.init(
     {
       ownerId: { type: DataTypes.INTEGER },
-      power: { type: DataTypes.STRING },
-      powerDescription: { type: DataTypes.TEXT },
+      power: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        },
+      },
+      powerDescription: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: true,
+        },
+      },
     },
     {
       sequelize,

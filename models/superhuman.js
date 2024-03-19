@@ -7,10 +7,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Superpower, Image }) {
+    static associate({ Superpower, Picture }) {
       // define association here
       Superhuman.hasMany(Superpower, {
         foreignKey: 'ownerId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
+
+      Superhuman.belongsToMany(Picture, {
+        through: 'superhumans_to_picture',
+        foreignKey: 'superhumanId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       });
@@ -18,10 +25,32 @@ module.exports = (sequelize, DataTypes) => {
   }
   Superhuman.init(
     {
-      nickname: { type: DataTypes.STRING },
-      realName: { type: DataTypes.STRING },
-      originDescription: { type: DataTypes.TEXT },
-      catchPhrase: { type: DataTypes.STRING },
+      nickname: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      realName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          notNull: true,
+        },
+      },
+      originDescription: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      catchPhrase: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
     },
     {
       sequelize,
