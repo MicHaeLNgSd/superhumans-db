@@ -12,6 +12,15 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         field: 'owner_id',
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'superhumans',
+          },
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       power: {
         type: Sequelize.STRING,

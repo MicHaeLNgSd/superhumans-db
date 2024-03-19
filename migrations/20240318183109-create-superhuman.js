@@ -10,10 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       nickname: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
       },
       realName: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(200),
         allowNull: false,
         field: 'real_name',
       },
@@ -22,7 +22,7 @@ module.exports = {
         field: 'origin_description',
       },
       catchPhrase: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(500),
         field: 'catch_phrase',
       },
       createdAt: {

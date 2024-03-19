@@ -7,8 +7,13 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ Superhuman }) {
       // define association here
+      Superpower.belongsTo(Superhuman, {
+        foreignKey: 'ownerId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
     }
   }
   Superpower.init(
@@ -21,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'Superpower',
       tableName: 'superpowers',
+      underscored: true,
     }
   );
   return Superpower;
