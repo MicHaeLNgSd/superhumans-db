@@ -28,5 +28,5 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  return Pictures;
+  return Picture;
 };
