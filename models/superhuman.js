@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Superhuman.belongsToMany(Picture, {
-        through: 'superhumans_to_picture',
+        through: 'superhumans_to_pictures',
         foreignKey: 'superhumanId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',

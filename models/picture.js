@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Superhuman }) {
       // define association here
       Picture.belongsToMany(Superhuman, {
-        through: 'superhumans_to_picture',
+        through: 'superhumans_to_pictures',
         foreignKey: 'pictureId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
