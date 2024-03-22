@@ -1,27 +1,30 @@
-const superhumansRoute = require('express').Router();
+const superhumansRouter = require('express').Router();
+const superpowerRouter = require('./superpowerRouter');
 const { SuperhumanController } = require('../controllers');
 const { findSuperhuman } = require('./../middlewares');
-// superhumansRoute.get('/', (req, res, next) => {
+// superhumansRouter.get('/', (req, res, next) => {
 //   res.send();
 //   res.next();
 // });
 
-superhumansRoute.post('/', SuperhumanController.createSuperhuman);
-superhumansRoute.get('/', SuperhumanController.getSuperhumans);
-superhumansRoute.get(
+superhumansRouter.post('/', SuperhumanController.createSuperhuman);
+superhumansRouter.get('/', SuperhumanController.getSuperhumans);
+superhumansRouter.get(
   '/:superhumanId',
   findSuperhuman,
   SuperhumanController.getSuperhuman
 );
-superhumansRoute.put(
+superhumansRouter.put(
   '/:superhumanId',
   findSuperhuman,
   SuperhumanController.updateSuperhuman
 );
-superhumansRoute.delete(
+superhumansRouter.delete(
   '/:superhumanId',
   findSuperhuman,
   SuperhumanController.deleteSuperhuman
 );
 
-module.exports = superhumansRoute;
+superhumansRouter.use('/:superhumanId/superpowers', findSuperhuman, superpowerRouter);
+
+module.exports = superhumansRouter;
