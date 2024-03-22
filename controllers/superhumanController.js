@@ -1,4 +1,4 @@
-const { Superhuman } = require('../models');
+const { Superhuman } = require('../db/models');
 const { Op } = require('sequelize');
 
 module.exports.createSuperhuman = async (req, res, next) => {
@@ -27,8 +27,30 @@ module.exports.getSuperhumans = async (req, res, next) => {
 
 module.exports.getSuperhuman = async (req, res, next) => {
   try {
-    const superhuman = await Superhuman.findAll();
+    const { superhuman } = req;
     res.status(200).send({ data: superhuman });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.updateSuperhuman = async (req, res, next) => {
+  try {
+    const { body, superhuman } = req;
+    const updatedSuperhuman = await superhuman.update(body, {
+      returning: true,
+    });
+    res.status(200).send({ data: updatedSuperhuman });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.deleteSuperhuman = async (req, res, next) => {
+  try {
+    const { superhuman: deletedSuperhuman } = req;
+    await deletedSuperhuman.destroy();
+    res.status(200).send({ data: deletedSuperhuman });
   } catch (error) {
     next(error);
   }

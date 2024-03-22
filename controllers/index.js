@@ -1,2 +1,2 @@
-module.exports.superhumanController = require('./superhumanController');
+module.exports.SuperhumanController = require('./superhumanController');
 // module.exports.superpowerController = require('./superpowerController');
