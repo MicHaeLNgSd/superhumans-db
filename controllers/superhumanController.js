@@ -1,4 +1,4 @@
-const { Superhuman } = require('../db/models');
+const { Superhuman, Superpower } = require('../db/models');
 const { Op } = require('sequelize');
 
 module.exports.createSuperhuman = async (req, res, next) => {
@@ -18,7 +18,15 @@ module.exports.getSuperhumans = async (req, res, next) => {
     // const superhuman = await Superhuman.findAll({
     //   ...pagination,
     // });
-    const superhuman = await Superhuman.findAll();
+    const superhuman = await Superhuman.findAll({
+      // include: [
+      //   {
+      //     model: Superpower,
+      //     required: true,
+      //     attributes: ['power', 'power_description'],
+      //   },
+      // ],
+    });
     res.status(200).send({ data: superhuman });
   } catch (error) {
     next(error);
