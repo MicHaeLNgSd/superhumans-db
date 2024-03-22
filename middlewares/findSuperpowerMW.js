@@ -15,12 +15,14 @@ module.exports = async (req, res, next) => {
       },
     });
 
+    // const superpower = await superhuman.getSuperpower(superpowerId);
+
     if (!superpower) {
       throw createError(404, 'Superpower was not found');
     }
     req.superpower = superpower;
     next();
   } catch (error) {
-    next(error);
+    next(error.message);
   }
 };
