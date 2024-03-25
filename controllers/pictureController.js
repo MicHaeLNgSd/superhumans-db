@@ -23,9 +23,7 @@ module.exports.getPictures = async (req, res, next) => {
     // });
     const pictures = await superhuman.getPictures({
       attributes: ['path'],
-      through: {
-        attributes: [],
-      },
+      joinTableAttributes: [],
     });
     res.send({ data: pictures });
   } catch (error) {
