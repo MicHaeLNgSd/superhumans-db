@@ -3,12 +3,13 @@ const { Op } = require('sequelize');
 
 module.exports.createSuperhuman = async (req, res, next) => {
   try {
-    const { body, file: { filename } = {} } = req;
+    const { body } = req;
+    // const { body, file: { filename } = {} } = req;
 
-    const superhumanData = {
-      ...body,
-      path: filename,
-    };
+    // const superhumanData = {
+    //   ...body,
+    //   path: filename,
+    // };
 
     const superhuman = await Superhuman.create(body);
 
@@ -28,11 +29,14 @@ module.exports.getSuperhumans = async (req, res, next) => {
       include: [
         {
           model: Superpower,
-          attributes: ['power', 'power_description'],
+          attributes: ['id', 'power', 'power_description'],
         },
         {
           model: Picture,
-          attributes: ['path'],
+          attributes: ['id', 'path'],
+          through: {
+            attributes: [],
+          },
         },
       ],
     });

@@ -5,8 +5,9 @@ const basicErrorHandler = require('./middlewares/errors');
 const app = express();
 
 app.use(express.json());
+app.use(express.static('public'));
 app.use(router);
-app.get('*', (req, res, next) => res.send('NOT FOUND'));
+// app.get('*', (req, res, next) => res.send('NOT FOUND'));
 app.use(basicErrorHandler);
 
 module.exports = app;
