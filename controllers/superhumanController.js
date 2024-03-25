@@ -3,17 +3,23 @@ const { Op } = require('sequelize');
 
 module.exports.createSuperhuman = async (req, res, next) => {
   try {
-    const { body } = req;
-    // const { body, file: { filename } = {} } = req;
-
-    // const superhumanData = {
-    //   ...body,
-    //   path: filename,
-    // };
+    // const { body } = req;
+    const {
+      body: { power, powerDescription, ...body },
+      file: { filename } = {},
+    } = req;
 
     const superhuman = await Superhuman.create(body);
+    const superpower = await superhuman.createSuperpower({ power, powerDescription });
+    const picture = await superhuman.createPicture({ path: filename });
 
-    res.status(201).send({ data: superhuman });
+    const superhumanData = {
+      ...body,
+      Superpowers: superpower,
+      Pictures: picture,
+    };
+
+    res.status(201).send({ data: superhumanData });
   } catch (error) {
     next(error);
   }
